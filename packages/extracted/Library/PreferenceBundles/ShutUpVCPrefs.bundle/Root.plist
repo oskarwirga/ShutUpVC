@@ -17,6 +17,16 @@
 			<string>Enabled</string>
 		</dict>
         <dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>alignment</key>
+			<string>1</string>
+			<key>action</key>
+			<string>respring</string>
+			<key>label</key>
+			<string>Reload SpringBoard</string>
+		</dict>
+        <dict>
             <key>label</key>
             <string>Contact</string>
             <key>cell</key>
