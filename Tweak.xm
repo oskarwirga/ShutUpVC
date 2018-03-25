@@ -1,34 +1,28 @@
-/* How to Hook with Logos
-Hooks are written with syntax similar to that of an Objective-C @implementation.
-You don't need to #include <substrate.h>, it will be done automatically, as will
-the generation of a class list and an automatic constructor.
+@interface FBSystemService
++(id)sharedInstance;
+-(void)exitAndRelaunch:(BOOL)arg1;
+@end
 
-%hook ClassName
+%hook SBMainDisplayPolicyAggregator
 
-// Hooking a class method
-+ (id)sharedInstance {
-	return %orig;
+void respringDevice() {
+    [[%c(FBSystemService) sharedInstance] exitAndRelaunch:YES];
 }
 
-// Hooking an instance method with an argument.
-- (void)messageName:(int)argument {
-	%log; // Write a message about this call, including its class, name and arguments, to the system log.
-
-	%orig; // Call through to the original function with its original arguments.
-	%orig(nil); // Call through to the original function with a custom argument.
-
-	// If you use %orig(), you MUST supply all arguments (except for self and _cmd, the automatically generated ones.)
+- (BOOL) _allowsCapabilityVoiceControlWithExplanation:(id*)voiceControlReason {
+    BOOL originalValue = %orig;
+    NSString *settingsPath = @"/var/mobile/Library/Preferences/com.oskarw.shutupvcprefs.plist";
+    NSMutableDictionary *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile:settingsPath];
+    BOOL enabled = [[prefs objectForKey:@"enabled"] boolValue];
+    if(enabled)
+        return NO;
+    return originalValue;
 }
-
-// Hooking an instance method with no arguments.
-- (id)noArguments {
-	%log;
-	id awesome = %orig;
-	[awesome doSomethingElse];
-
-	return awesome;
-}
-
-// Always make sure you clean up after yourself; Not doing so could have grave consequences!
 %end
-*/
+
+%ctor {
+    
+    CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)respringDevice, CFSTR("com.oskarw.shutupvc/respring"), NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
+
+
+}

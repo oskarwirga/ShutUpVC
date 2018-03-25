@@ -1,0 +1,10 @@
+Package: com.oskarw.shutupvc
+Name: ShutUpVC
+Depends: mobilesubstrate
+Architecture: iphoneos-arm
+Description: An awesome MobileSubstrate tweak!
+Maintainer: Oskar Wirga
+Author: Oskar Wirga
+Section: Tweaks
+Version: 0.0.1-9+debug
+Installed-Size: 396

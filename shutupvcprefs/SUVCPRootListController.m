@@ -10,6 +10,10 @@
 	return _specifiers;
 }
 
+- (void)respring {
+        CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), CFSTR("com.oskarw.shutupvc/respring"), NULL, NULL, YES);
+}
+
 - (void)twitter {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://twitter.com/oskarwirga"]];
 }
