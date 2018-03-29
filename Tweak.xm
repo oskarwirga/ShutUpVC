@@ -1,3 +1,4 @@
+#import <UIKit/UIKit.h>
 @interface FBSystemService
 +(id)sharedInstance;
 -(void)exitAndRelaunch:(BOOL)arg1;
@@ -14,6 +15,19 @@ void respringDevice() {
     NSString *settingsPath = @"/var/mobile/Library/Preferences/com.oskarw.shutupvcprefs.plist";
     NSMutableDictionary *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile:settingsPath];
     BOOL enabled = [[prefs objectForKey:@"enabled"] boolValue];
+    if(enabled)
+        return 0;
+    return originalValue;
+}
+%end
+
+%hook UIDictationController
+
+- (BOOL) dictationEnabled {
+    BOOL originalValue = %orig;
+    NSString *settingsPath = @"/var/mobile/Library/Preferences/com.oskarw.shutupvcprefs.plist";
+    NSMutableDictionary *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile:settingsPath];
+    BOOL enabled = [[prefs objectForKey:@"enabledDictation"] boolValue];
     if(enabled)
         return NO;
     return originalValue;
