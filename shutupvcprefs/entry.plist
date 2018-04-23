@@ -6,14 +6,19 @@
 	<dict>
 		<key>bundle</key>
 		<string>ShutUpVCPrefs</string>
+
 		<key>cell</key>
 		<string>PSLinkCell</string>
+
 		<key>detail</key>
 		<string>SUVCPRootListController</string>
+
 		<key>icon</key>
 		<string>shutupvclogo.png</string>
+
 		<key>isController</key>
 		<true/>
+
 		<key>label</key>
 		<string>ShutUp Voice Control</string>
 	</dict>
