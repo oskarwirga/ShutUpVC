@@ -6,8 +6,8 @@ I hate how clicking the middle button on stock Apple earpods brings up Voice Con
 
 ### Dictation
 
-![Dictation Demo](./Dictation.mp4)
+![Dictation Demo](http://repo.oskar.wirga.com/video/VoiceControl.mp4)
 
 ### Voice Control
 
-![VC Demo](./VoiceControl.mp4)
+![VC Demo](http://repo.oskar.wirga.com/video/VoiceControl.mp4)
